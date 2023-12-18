@@ -27,7 +27,7 @@ const keyboardShortcuts = [
 export default function PianoClue({childName}: {childName: ChildName}) {
   const [currentGuess, setCurrentGuess] = useState<string[]>([]);
   const [guessHistory, setGuessHistory] = useState<string[][]>([]);
-  const {correctGuess} = childData[childName];
+  const {clue, correctGuess} = childData[childName];
   const maxGuessLength = calcMaxGuessLength(correctGuess)
 
   function handlePlayNote(playNote: (midiNumber: string) => void) {
@@ -50,38 +50,50 @@ export default function PianoClue({childName}: {childName: ChildName}) {
   }, [currentGuess]);
 
   return (
-    <div className="flex justify-center gap-8">
-      <div style={{ width: 600 }}>
-        <SoundfontProvider
-          render={({ isLoading, playNote, stopNote }) => (
-            <Piano
-              noteRange={noteRange}
-              width={600}
-              playNote={handlePlayNote(playNote)}
-              stopNote={stopNote}
-              disabled={isLoading}
-              keyboardShortcuts={keyboardShortcuts}
-            />
-          )}
-        />
+    <div className="flex justify-center gap-4">
+      <div style={{ width: 400 }} className="flex flex-col justify-center gap-4">
+        <div>
+          <p>Directions:</p>
+          <p>Use the poem and witness statement to play a secret musical score. When you play the notes in the correct order, the suspect will be revealed!</p>
+        </div>
+        <div style={{ height: 174 }}>
+          <SoundfontProvider
+            render={({ isLoading, playNote, stopNote }) => (
+              <Piano
+                noteRange={noteRange}
+                width={400}
+                playNote={handlePlayNote(playNote)}
+                stopNote={stopNote}
+                disabled={isLoading}
+                keyboardShortcuts={keyboardShortcuts}
+              />
+            )}
+          />
+        </div>
+        <div>
+          <p>Clue:</p>
+          <p>{clue}</p>
+        </div>
       </div>
-      <div className="flex flex-col gap-y-16">
+      <div className="flex flex-col justify-center gap-y-8">
         <div className="flex flex-col items-center">
           <h4>Current Guess:</h4>
           <Guess guess={currentGuess} correctGuess={correctGuess} />
         </div>
         <div className="flex flex-col items-center">
           <h4>Past Guesses:</h4>
-          {guessHistory.map((pastGuess, index) => (
-            <div className="mb-8">
-              <Guess
-                key={`past-guess-${index}`}
-                guess={pastGuess}
-                correctGuess={correctGuess}
-                showCorrectGuesses
-              />
-            </div>
-          ))}
+          <div className="max-h-40 overflow-auto">
+            {guessHistory.reverse().map((pastGuess, index) => (
+              <div className="mb-4">
+                <Guess
+                  key={`past-guess-${index}`}
+                  guess={pastGuess}
+                  correctGuess={correctGuess}
+                  showCorrectGuesses
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -6,12 +6,13 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        'christmas-red': '#FF0000',
-        'christmas-green': '#00FF00',
-        'christmas-gold': '#FFD700',
+        'xmas-red': '#FF0000',
+        'xmas-green': '#00FF00',
+        'xmas-gold': '#FFD700',
       },
       fontFamily: {
         'dancing-script': ['var(--font-dancing-script)'],
