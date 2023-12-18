@@ -1,10 +1,12 @@
-type ChildName = 'gracie' | 'nicholas' | 'olivia' | 'sam';
+export type ChildName = 'gracie' | 'nicholas' | 'olivia' | 'sam';
+
 type ChildData = {
   [K in ChildName]: {
     clue: string,
     correctGuess: string,
     culprit: string,
     displayName: string,
+    hint: string,
     password: string,
   }
 }
@@ -15,6 +17,7 @@ export const childData: ChildData = {
     correctGuess: 'agaeac',
     culprit: 'elf',
     displayName: 'Gracie',
+    hint: '1 231 2 31231 2312 31 2312',
     password: 'cupcake',
   },
   nicholas: {
@@ -22,6 +25,7 @@ export const childData: ChildData = {
     correctGuess: 'acdaag',
     culprit: 'snowman',
     displayName: 'Nicholas',
+    hint: '1 231 2 31231 2312 31 2312',
     password: 'milkandcookies',
   },
   olivia: {
@@ -29,6 +33,7 @@ export const childData: ChildData = {
     correctGuess: 'edbgcgegcaafeedge',
     culprit: 'penguin',
     displayName: 'Olivia',
+    hint: '1 231 2 31231 2312 31 2312',
     password: 'candycane',
   },
   sam: {
@@ -36,6 +41,7 @@ export const childData: ChildData = {
     correctGuess: 'edaaagaeaagbd',
     culprit: 'reindeer',
     displayName: 'Sam',
+    hint: '1 231 2 31231 2312 31 2312',
     password: 'gingerbreadman',
   },
 }

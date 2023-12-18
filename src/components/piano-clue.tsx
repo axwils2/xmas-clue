@@ -24,10 +24,15 @@ const keyboardShortcuts = [
   { key: "b", midiNumber: MidiNumbers.fromNote('b3') },
 ];
 
-export default function PianoClue({childName}: {childName: ChildName}) {
+type Props = {
+  childName: ChildName,
+  displayHint: boolean,
+}
+
+export default function PianoClue({childName, displayHint}: Props) {
   const [currentGuess, setCurrentGuess] = useState<string[]>([]);
   const [guessHistory, setGuessHistory] = useState<string[][]>([]);
-  const {clue, correctGuess} = childData[childName];
+  const {clue, correctGuess, hint} = childData[childName];
   const maxGuessLength = calcMaxGuessLength(correctGuess)
 
   function handlePlayNote(playNote: (midiNumber: string) => void) {
@@ -54,7 +59,7 @@ export default function PianoClue({childName}: {childName: ChildName}) {
       <div style={{ width: 400 }} className="flex flex-col justify-center gap-4">
         <div>
           <p>Directions:</p>
-          <p>Use the poem and witness statement to play a secret musical score. When you play the notes in the correct order, the suspect will be revealed!</p>
+          <p>Use the poem and witness clue to play a secret musical score. When you play the notes in the correct order, the suspect will be revealed!</p>
         </div>
         <div style={{ height: 174 }}>
           <SoundfontProvider
@@ -72,7 +77,14 @@ export default function PianoClue({childName}: {childName: ChildName}) {
         </div>
         <div>
           <p>Clue:</p>
-          <p>{clue}</p>
+          <div className="flex">
+            {clue.split('').map(char => (
+              <div className={`${char === ' ' && 'mr-1'}`}>{char}</div>
+            ))}
+          </div>
+          {displayHint && (
+            <p>{hint}</p>
+          )}
         </div>
       </div>
       <div className="flex flex-col justify-center gap-y-8">

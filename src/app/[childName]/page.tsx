@@ -31,7 +31,7 @@ export default function Page() {
           <p>and with love of music, devised a clue.</p>
           <p className="mt-4">The piano is the key</p>
           <p>and can help eliminate the other THREE.</p>
-          {!pianoVisible && <button className="btn bg-xmas-green mt-4" onClick={handleReadyClick}>Ready?!</button>}
+          {!pianoVisible && <button className="btn bg-xmas-green text-white mt-4" onClick={handleReadyClick}>Ready?!</button>}
         </div>
         <div className="flex flex-col">
           {hintCount > 0 && (
@@ -44,13 +44,13 @@ export default function Page() {
             <p>Hint 3: Use the numbers below the clue to help play the piano!</p>
           )}
           {pianoVisible && hintCount <= 2 && (
-            <button className="btn bg-xmas-green" onClick={handleHintClick} disabled={hintCount > 2}>
+            <button className="btn bg-xmas-green text-white" onClick={handleHintClick} disabled={hintCount > 2}>
               Need {hintCount > 0 ? 'another' : 'a'} hint?
             </button>
           )}
         </div>
       </div>
-      {pianoVisible && <PianoClue childName={childName} />}
+      {pianoVisible && <PianoClue childName={childName} displayHint={hintCount > 2} />}
     </div>
   );
 }

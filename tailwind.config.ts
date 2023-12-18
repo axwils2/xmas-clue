@@ -11,7 +11,7 @@ const config: Config = {
     extend: {
       colors: {
         'xmas-red': '#FF0000',
-        'xmas-green': '#00FF00',
+        'xmas-green': '#143306',
         'xmas-gold': '#FFD700',
       },
       fontFamily: {
