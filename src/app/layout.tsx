@@ -1,8 +1,18 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Dancing_Script, Pacifico } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const dancingScript = Dancing_Script({
+  subsets: ['latin'],
+  variable: '--font-dancing-script',
+  weight: '400',
+});
+
+const pacifico = Pacifico({
+  subsets: ['latin'],
+  variable: '--font-pacifico',
+  weight: '400',
+});
 
 export const metadata: Metadata = {
   title: 'Christmas Clue',
@@ -16,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${dancingScript.variable} ${pacifico.variable}`}>{children}</body>
     </html>
   )
 }

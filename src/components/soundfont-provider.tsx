@@ -1,6 +1,6 @@
 // See https://github.com/danigb/soundfont-player
 // for more documentation on prop options.
-import {ReactNode, useState} from 'react';
+import {ReactNode, useEffect, useState} from 'react';
 import Soundfont, {Player} from 'soundfont-player';
 
 type Props = {
@@ -22,18 +22,22 @@ export default function SoundfontProvider({render}: Props) {
   const [activeAudioNotes, setActiveAudioNotes] = useState<ActiveAudioNote>({});
   const [instrument, setInstrument] = useState<Player | null>(null);
 
-  Soundfont.instrument(
-    audioContext,
-    INSTRUMENT_NAME,
-    {
-      format: FORMAT,
-      soundfont: SOUNDFONT,
-      nameToUrl: (name: string, soundfont: string, format: string) => {
-        return `${SOUNDFONT_HOSTNAME}/${soundfont}/${name}-${format}.js`;
-      },
-    }).then(loadedInstrument => {
-      setInstrument(loadedInstrument)
-  });
+  useEffect(() => loadInstrument(), []);
+
+  function loadInstrument() {
+    Soundfont.instrument(
+      audioContext,
+      INSTRUMENT_NAME,
+      {
+        format: FORMAT,
+        soundfont: SOUNDFONT,
+        nameToUrl: (name: string, soundfont: string, format: string) => {
+          return `${SOUNDFONT_HOSTNAME}/${soundfont}/${name}-${format}.js`;
+        },
+      }).then(loadedInstrument => {
+        setInstrument(loadedInstrument)
+    });
+  };
 
   function playNote(midiNumber: string) {
     if (!instrument) return;

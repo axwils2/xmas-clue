@@ -8,11 +8,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      colors: {
+        'christmas-red': '#FF0000',
+        'christmas-green': '#00FF00',
+        'christmas-gold': '#FFD700',
       },
+      fontFamily: {
+        'dancing-script': ['var(--font-dancing-script)'],
+        pacifico: ['var(--font-pacifico)'],
+      }
     },
   },
   plugins: [],
