@@ -95,10 +95,10 @@ export default function PianoClue({childName, displayHint}: Props) {
         <div className="flex flex-col items-center">
           <h4>Past Guesses:</h4>
           <div className="max-h-40 overflow-auto">
-            {guessHistory.reverse().map((pastGuess, index) => (
+            {guessHistory.toReversed().map((pastGuess, index) => (
               <div className="mb-4">
                 <Guess
-                  key={`past-guess-${index}`}
+                  key={`past-guess-${pastGuess.join('')}-${index}`}
                   guess={pastGuess}
                   correctGuess={correctGuess}
                   showCorrectGuesses
