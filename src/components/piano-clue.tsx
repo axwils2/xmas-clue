@@ -25,14 +25,13 @@ const keyboardShortcuts = [
 ];
 
 type Props = {
-  childName: ChildName,
-  displayHint: boolean,
+  childName: ChildName
 }
 
-export default function PianoClue({childName, displayHint}: Props) {
+export default function PianoClue({childName}: Props) {
   const [currentGuess, setCurrentGuess] = useState<string[]>([]);
   const [guessHistory, setGuessHistory] = useState<string[][]>([]);
-  const {clue, correctGuess, hint} = childData[childName];
+  const {clue, correctGuess} = childData[childName];
   const maxGuessLength = calcMaxGuessLength(correctGuess)
 
   function handlePlayNote(playNote: (midiNumber: string) => void) {
@@ -58,8 +57,8 @@ export default function PianoClue({childName, displayHint}: Props) {
     <div className="flex justify-center gap-4">
       <div style={{ width: 400 }} className="flex flex-col justify-center gap-4">
         <div>
-          <p>Directions:</p>
-          <p>Use the poem and witness clue to play a secret musical score. When you play the notes in the correct order, the suspect will be revealed!</p>
+          <p className="font-bold text-xmas-red">Directions:</p>
+          <p>Use the poem and witness clue below to play a secret musical score. When you play the notes in the correct order, the suspect will be revealed!</p>
         </div>
         <div style={{ height: 174 }}>
           <SoundfontProvider
@@ -76,25 +75,22 @@ export default function PianoClue({childName, displayHint}: Props) {
           />
         </div>
         <div>
-          <p>Clue:</p>
+          <p className="font-bold text-xmas-red">Your Clue:</p>
           <div className="flex">
             {clue.split('').map(char => (
               <div className={`${char === ' ' && 'mr-1'}`}>{char}</div>
             ))}
           </div>
-          {displayHint && (
-            <p>{hint}</p>
-          )}
         </div>
       </div>
       <div className="flex flex-col justify-center gap-y-8">
         <div className="flex flex-col items-center">
-          <h4>Current Guess:</h4>
+          <p className="font-bold text-xmas-red">Current Guess:</p>
           <Guess guess={currentGuess} correctGuess={correctGuess} />
         </div>
         <div className="flex flex-col items-center">
-          <h4>Past Guesses:</h4>
-          <div className="max-h-40 overflow-auto">
+          <p className="font-bold text-xmas-red">Past Guesses:</p>
+          <div className="max-h-52 overflow-auto">
             {guessHistory.toReversed().map((pastGuess, index) => (
               <div className="mb-4">
                 <Guess

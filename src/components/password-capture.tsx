@@ -11,7 +11,7 @@ export default function PasswordCapture() {
   const router = useRouter();
 
   function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
-    setPassword(e.target.value.toUpperCase());
+    setPassword(e.target.value.toUpperCase().replace(/\s+/g, ''));
   }
 
   function onSubmit() {

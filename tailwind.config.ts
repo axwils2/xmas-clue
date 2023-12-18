@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'xmas-red': '#FF0000',
+        'xmas-red': '#C30F16',
         'xmas-green': '#143306',
         'xmas-gold': '#FFD700',
       },

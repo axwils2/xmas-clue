@@ -26,7 +26,7 @@ export default function Page() {
       <BackgroundImage />
       <div className="flex flex-col gap-6 max-w-xs">
         <div>
-          <h4>Poem:</h4>
+          <p className="font-bold text-xmas-red">Poem:</p>
           <p>There was a witness that saw who,</p>
           <p>and with love of music, devised a clue.</p>
           <p className="mt-4">The piano is the key</p>
@@ -35,13 +35,67 @@ export default function Page() {
         </div>
         <div className="flex flex-col">
           {hintCount > 0 && (
-            <p>Hint 1: What letters in the clue are musical notes?</p>
+            <p><span className="font-bold text-xmas-red">Hint 1:</span> What letters in the clue are musical notes?</p>
           )}
           {hintCount > 1 && (
-            <p>Hint 2: The number THREE will set a message free!</p>
+            <p><span className="font-bold text-xmas-red">Hint 2:</span> The number THREE will set a message free!</p>
           )}
           {hintCount > 2 && (
-            <p>Hint 3: Use the numbers below the clue to help play the piano!</p>
+            <div>
+              <p><span className="font-bold text-xmas-red">Hint 3:</span> See the example below and apply it to your clue to help play the piano!</p>
+              <div className="flex">
+                <div className="flex flex-col items-center">
+                  <span>T</span>
+                  <span>1</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span>H</span>
+                  <span>2</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span>E</span>
+                  <span>3</span>
+                </div>
+                <div className="w-2" />
+                <div className="flex flex-col items-center">
+                  <span>F</span>
+                  <span>1</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span>I</span>
+                  <span>2</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span>N</span>
+                  <span>3</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span>A</span>
+                  <span>1</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span>L</span>
+                  <span>2</span>
+                </div>
+                <div className="w-2" />
+                <div className="flex flex-col items-center">
+                  <span>H</span>
+                  <span>3</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span>I</span>
+                  <span>1</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span>N</span>
+                  <span>2</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span>T</span>
+                  <span>3</span>
+                </div>
+              </div>
+            </div>
           )}
           {pianoVisible && hintCount <= 2 && (
             <button className="btn bg-xmas-green text-white" onClick={handleHintClick} disabled={hintCount > 2}>
@@ -50,7 +104,7 @@ export default function Page() {
           )}
         </div>
       </div>
-      {pianoVisible && <PianoClue childName={childName} displayHint={hintCount > 2} />}
+      {pianoVisible && <PianoClue childName={childName} />}
     </div>
   );
 }
