@@ -57,7 +57,7 @@ export default function PianoClue({childName, onCorrectGuess}: Props) {
         setCurrentGuess([]);
       }
     }
-  }, [currentGuess]);
+  }, [currentGuess, guessCorrect, onCorrectGuess, maxGuessLength]);
 
   return (
     <div className="flex justify-center gap-4">
@@ -94,9 +94,8 @@ export default function PianoClue({childName, onCorrectGuess}: Props) {
           <p className="font-bold text-xmas-red">Past Guesses:</p>
           <div className="max-h-52 overflow-auto">
             {guessHistory.toReversed().map((pastGuess, index) => (
-              <div className="mb-4">
+              <div className="mb-4" key={`past-guess-${pastGuess.join('')}-${index}`}>
                 <Guess
-                  key={`past-guess-${pastGuess.join('')}-${index}`}
                   guess={pastGuess}
                   correctGuess={correctGuess}
                   showCorrectGuesses
