@@ -25,20 +25,22 @@ const keyboardShortcuts = [
 ];
 
 type Props = {
-  childName: ChildName
+  childName: ChildName,
+  onCorrectGuess: () => void,
 }
 
-export default function PianoClue({childName}: Props) {
+export default function PianoClue({childName, onCorrectGuess}: Props) {
   const [currentGuess, setCurrentGuess] = useState<string[]>([]);
   const [guessHistory, setGuessHistory] = useState<string[][]>([]);
   const {clue, correctGuess} = childData[childName];
   const maxGuessLength = calcMaxGuessLength(correctGuess)
+  const guessCorrect = correctGuess === currentGuess.join('');
 
   function handlePlayNote(playNote: (midiNumber: string) => void) {
     return (midiNumber: string) => {
       const shortCut = keyboardShortcuts.find(shortCut => shortCut.midiNumber === midiNumber);
 
-      if (shortCut) {
+      if (shortCut && !guessCorrect) {
         setCurrentGuess(prev => ([...prev, shortCut.key]));
       }
 
@@ -48,8 +50,12 @@ export default function PianoClue({childName}: Props) {
 
   useEffect(() => {
     if (currentGuess.length === maxGuessLength) {
-      setGuessHistory(prev => ([...prev, currentGuess]));
-      setCurrentGuess([]);
+      if (guessCorrect) {
+        onCorrectGuess();
+      } else {
+        setGuessHistory(prev => ([...prev, currentGuess]));
+        setCurrentGuess([]);
+      }
     }
   }, [currentGuess]);
 
@@ -86,7 +92,7 @@ export default function PianoClue({childName}: Props) {
       <div className="flex flex-col justify-center gap-y-8">
         <div className="flex flex-col items-center">
           <p className="font-bold text-xmas-red">Current Guess:</p>
-          <Guess guess={currentGuess} correctGuess={correctGuess} />
+          <Guess guess={currentGuess} correctGuess={correctGuess} showCorrectGuesses={guessCorrect} />
         </div>
         <div className="flex flex-col items-center">
           <p className="font-bold text-xmas-red">Past Guesses:</p>

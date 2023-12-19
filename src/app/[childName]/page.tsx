@@ -2,14 +2,17 @@
 
 import {useState} from 'react';
 import {useParams} from 'next/navigation';
+import Confetti from 'react-confetti';
 
 import BackgroundImage from '@/components/background-image';
+import HintExample from '@/components/hint-example';
 import PianoClue from '@/components/piano-clue';
 import {ChildName} from '@/constants';
 
 export default function Page() {
   const [pianoVisible, setPianoVisible] = useState(false);
   const [hintCount, setHintCount] = useState(0);
+  const [showConfetti, setShowConfetti] = useState(false);
   const params = useParams();
   const childName = params.childName as ChildName;
 
@@ -21,9 +24,20 @@ export default function Page() {
     setHintCount(prev => (Math.min(prev + 1, 3)));
   }
 
+  function handleGuessCorrect() {
+    setShowConfetti(true)
+  }
+
   return (
     <div className="min-h-screen flex justify-center items-center gap-4 p-4">
       <BackgroundImage />
+      <Confetti
+        run={showConfetti}
+        recycle={false}
+        numberOfPieces={5000}
+        colors={['#C30F16', '#143306', '#FFD700', 'white']}
+        tweenDuration={20000}
+      />
       <div className="flex flex-col gap-6 max-w-xs">
         <div>
           <p className="font-bold text-xmas-red">Poem:</p>
@@ -43,58 +57,7 @@ export default function Page() {
           {hintCount > 2 && (
             <div>
               <p><span className="font-bold text-xmas-red">Hint 3:</span> See the example below and apply it to your clue to help play the piano!</p>
-              <div className="flex">
-                <div className="flex flex-col items-center">
-                  <span>T</span>
-                  <span>1</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <span>H</span>
-                  <span>2</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <span>E</span>
-                  <span>3</span>
-                </div>
-                <div className="w-2" />
-                <div className="flex flex-col items-center">
-                  <span>F</span>
-                  <span>1</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <span>I</span>
-                  <span>2</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <span>N</span>
-                  <span>3</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <span>A</span>
-                  <span>1</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <span>L</span>
-                  <span>2</span>
-                </div>
-                <div className="w-2" />
-                <div className="flex flex-col items-center">
-                  <span>H</span>
-                  <span>3</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <span>I</span>
-                  <span>1</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <span>N</span>
-                  <span>2</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <span>T</span>
-                  <span>3</span>
-                </div>
-              </div>
+              <HintExample />
             </div>
           )}
           {pianoVisible && hintCount <= 2 && (
@@ -104,7 +67,7 @@ export default function Page() {
           )}
         </div>
       </div>
-      {pianoVisible && <PianoClue childName={childName} />}
+      {pianoVisible && <PianoClue childName={childName} onCorrectGuess={handleGuessCorrect} />}
     </div>
   );
 }
