@@ -1,10 +1,16 @@
 import type { Metadata } from 'next'
-import { Dancing_Script, Pacifico } from 'next/font/google'
+import { Dancing_Script, Lexend, Pacifico } from 'next/font/google'
 import './globals.css'
 
 const dancingScript = Dancing_Script({
   subsets: ['latin'],
   variable: '--font-dancing-script',
+  weight: '400',
+});
+
+const lexend = Lexend({
+  subsets: ['latin'],
+  variable: '--font-lexend',
   weight: '400',
 });
 
@@ -26,7 +32,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${dancingScript.variable} ${pacifico.variable}`}>{children}</body>
+      <body className={`${dancingScript.variable} ${lexend.variable} ${pacifico.variable} font-lexend`}>{children}</body>
     </html>
   )
 }

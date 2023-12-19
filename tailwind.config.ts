@@ -16,6 +16,7 @@ const config: Config = {
       },
       fontFamily: {
         'dancing-script': ['var(--font-dancing-script)'],
+        lexend: ['var(--font-lexend)'],
         pacifico: ['var(--font-pacifico)'],
       }
     },
