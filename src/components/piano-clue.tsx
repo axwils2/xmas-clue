@@ -82,11 +82,7 @@ export default function PianoClue({childName, onCorrectGuess}: Props) {
         </div>
         <div>
           <p className="font-bold text-xmas-red">Your Clue:</p>
-          <div className="flex">
-            {clue.split('').map(char => (
-              <div className={`${char === ' ' && 'mr-1'}`}>{char}</div>
-            ))}
-          </div>
+          <p>{clue}</p>
         </div>
       </div>
       <div className="flex flex-col justify-center gap-y-8">

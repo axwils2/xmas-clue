@@ -5,6 +5,7 @@ import {useParams} from 'next/navigation';
 import Confetti from 'react-confetti';
 
 import BackgroundImage from '@/components/background-image';
+import CulpritOverlay from '@/components/culprit-overlay';
 import HintExample from '@/components/hint-example';
 import PianoClue from '@/components/piano-clue';
 import {ChildName} from '@/constants';
@@ -13,6 +14,7 @@ export default function Page() {
   const [pianoVisible, setPianoVisible] = useState(false);
   const [hintCount, setHintCount] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [culpritVisible, setCulpritVisible] = useState(false);
   const params = useParams();
   const childName = params.childName as ChildName;
 
@@ -28,6 +30,10 @@ export default function Page() {
     setShowConfetti(true)
   }
 
+  function handleConfettiComplete() {
+    setCulpritVisible(true);
+  }
+
   return (
     <div className="min-h-screen flex justify-center items-center gap-4 p-4">
       <BackgroundImage />
@@ -36,8 +42,10 @@ export default function Page() {
         recycle={false}
         numberOfPieces={5000}
         colors={['#C30F16', '#143306', '#FFD700', 'white']}
-        tweenDuration={20000}
+        tweenDuration={16000}
+        onConfettiComplete={handleConfettiComplete}
       />
+      <CulpritOverlay visible={culpritVisible} childName={childName} />
       <div className="flex flex-col gap-6 max-w-xs">
         <div>
           <p className="font-bold text-xmas-red">Poem:</p>
