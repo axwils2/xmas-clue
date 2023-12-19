@@ -46,7 +46,7 @@ export const childData: ChildData = {
     password: 'milkandcookies',
   },
   olivia: {
-    clue: 'I LET A DRAB DOG RACE A GUY. ELEGANCE WAS A FAKE AIM, AS I WAS FACE THE ODD FIGURE.',
+    clue: 'I LET A DRAB DOG RACE A GUY. ELEGANCE A FAKE AIM, AS I WAS FACE THE ODD FIGURE.',
     correctGuess: 'edbgcgegcaaaafeedge',
     culprit: 'penguin',
     displayName: 'Olivia',

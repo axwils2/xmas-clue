@@ -18,7 +18,7 @@ export default function Page() {
   const [hintCount, setHintCount] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
   const [culpritVisible, setCulpritVisible] = useState(false);
-  const [playMusic] = useSound('holly-jolly-christmas.mp3');
+  const [playMusic] = useSound('holly-jolly-christmas.mp3', { interrupt: true });
   const params = useParams();
   const childName = params.childName as ChildName;
 
@@ -31,6 +31,8 @@ export default function Page() {
   }
 
   function handleGuessCorrect() {
+    if (showConfetti) return;
+
     playMusic();
     setShowConfetti(true)
   }
