@@ -8,10 +8,8 @@ export default function BackgroundImage() {
       src={background}
       placeholder="blur"
       quality={100}
-      fill
       sizes="100vw"
-      objectFit="cover"
-      className="m-0 h-screen w-screen overflow-hidden -z-10"
+      className="m-0 h-screen w-screen overflow-hidden -z-10 fixed"
     />
   )
 };

@@ -1,8 +1,8 @@
 'use client'
 
 import {useState} from 'react';
+import dynamic from 'next/dynamic';
 import {useParams} from 'next/navigation';
-import Confetti from 'react-confetti';
 import useSound from 'use-sound';
 
 import BackgroundImage from '@/components/background-image';
@@ -11,12 +11,14 @@ import HintExample from '@/components/hint-example';
 import PianoClue from '@/components/piano-clue';
 import {ChildName} from '@/constants';
 
+const Confetti = dynamic(() => import('react-confetti'), { ssr: false });
+
 export default function Page() {
   const [pianoVisible, setPianoVisible] = useState(false);
   const [hintCount, setHintCount] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
   const [culpritVisible, setCulpritVisible] = useState(false);
-  const [playMusic] = useSound('/holly-jolly-christmas.mp3');
+  const [playMusic] = useSound('holly-jolly-christmas.mp3');
   const params = useParams();
   const childName = params.childName as ChildName;
 

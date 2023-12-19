@@ -17,7 +17,7 @@ export default function Guess({correctGuess, guess, showCorrectGuesses = false}:
         const displayCorrect = correctLetterGuess && showCorrectGuesses;
 
         return (
-          <div className={`mx-1 ${displayCorrect && 'text-green-500 font-bold'}`}>{guessLetter.toUpperCase()}</div>
+          <div key={`guess-${index}`} className={`mx-1 ${displayCorrect && 'text-green-500 font-bold'}`}>{guessLetter.toUpperCase()}</div>
         );
       })}
     </div>

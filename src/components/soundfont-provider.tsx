@@ -10,8 +10,12 @@ type Props = {
 type ActiveAudioNote = { [midiNumber: string]: Player | null };
 
 // webkitAudioContext fallback needed to support Safari
-// @ts-ignore
-const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+let audioContext: null | AudioContext = null
+
+if (typeof window !== "undefined") {
+  // @ts-ignore
+  audioContext = new (window.AudioContext || window.webkitAudioContext)();
+}
 
 const SOUNDFONT_HOSTNAME = 'https://d1pzp51pvbm36p.cloudfront.net';
 const FORMAT = 'mp3';
@@ -25,6 +29,8 @@ export default function SoundfontProvider({render}: Props) {
   useEffect(() => loadInstrument(), []);
 
   function loadInstrument() {
+    if (!audioContext) return;
+
     Soundfont.instrument(
       audioContext,
       INSTRUMENT_NAME,
@@ -40,7 +46,7 @@ export default function SoundfontProvider({render}: Props) {
   };
 
   function playNote(midiNumber: string) {
-    if (!instrument) return;
+    if (!instrument || !audioContext) return;
 
     audioContext.resume().then(() => {
       const audioNote = instrument.play(midiNumber);
@@ -49,6 +55,8 @@ export default function SoundfontProvider({render}: Props) {
   };
 
   function stopNote(midiNumber: string) {
+    if (!audioContext) return;
+
     audioContext.resume().then(() => {
       const audioNote = activeAudioNotes[midiNumber];
       if (!audioNote) return;
