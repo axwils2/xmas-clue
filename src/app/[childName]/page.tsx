@@ -3,6 +3,7 @@
 import {useState} from 'react';
 import {useParams} from 'next/navigation';
 import Confetti from 'react-confetti';
+import useSound from 'use-sound';
 
 import BackgroundImage from '@/components/background-image';
 import CulpritOverlay from '@/components/culprit-overlay';
@@ -15,6 +16,7 @@ export default function Page() {
   const [hintCount, setHintCount] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
   const [culpritVisible, setCulpritVisible] = useState(false);
+  const [playMusic] = useSound('/holly-jolly-christmas.mp3');
   const params = useParams();
   const childName = params.childName as ChildName;
 
@@ -27,6 +29,7 @@ export default function Page() {
   }
 
   function handleGuessCorrect() {
+    playMusic();
     setShowConfetti(true)
   }
 

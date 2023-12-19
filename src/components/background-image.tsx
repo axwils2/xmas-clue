@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import background from '@/assets/background.png';
+import background from '@public/background.png';
 
 export default function BackgroundImage() {
   return (

@@ -1,7 +1,7 @@
-import elf from '@/assets/elf.png';
-import penguin from '@/assets/penguin.png';
-import reindeer from '@/assets/reindeer.png';
-import snowman from '@/assets/snowman.png';
+import elf from '@public/elf.png';
+import penguin from '@public/penguin.png';
+import reindeer from '@public/reindeer.png';
+import snowman from '@public/snowman.png';
 
 import {StaticImageData} from 'next/image';
 
